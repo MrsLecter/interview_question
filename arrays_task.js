@@ -103,7 +103,7 @@ function twoSum(nums, target) {
 * You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
 */
 
-let matrix = [[1,2,3],[4,5,6],[7,8,9]];
+// let matrix = [[1,2,3],[4,5,6],[7,8,9]];
 // let matrix2 = [[5,1,9,11],[2,4,8,10],[13,3,6,7],[15,14,12,16]];
 
 function  rotate(matrix) {
@@ -127,6 +127,124 @@ function  rotate(matrix) {
 }
 
 
-console.log(rotate(matrix));
+// console.log(rotate(matrix));
 // console.log(rotate(matrix2));
 
+/*
+* Given two integer arrays nums1 and nums2, return an array of their intersection.
+*  Each element in the result must appear as many times as it shows in both arrays 
+* and you may return the result in any order.
+*/
+
+// let nums1 = [4,9,5];
+// let nums2 = [9,4,9,8,4];
+/*
+function intersect(nums1, nums2) {
+    let temp = [];
+    let maxArr = (nums1.length > nums2.length) ? nums1 : nums2;
+
+    for(let i = 0; i < maxArr.length; i++){
+      if()
+    }
+};
+*/
+
+// console.log(nums2.includes([9,4]));
+
+/*
+* Given an integer array nums, return true if any value 
+* appears at least twice in the array, and return false if every element is distinct.
+*/
+
+// let nums = [1,1,1,3,3,4,3,2,4,2];
+//true
+ function containsDuplicate(nums) {
+   let newArr = nums.sort();
+    for(let i = 0; i < newArr.length; i++){
+      if(newArr[i] === newArr[i+1]){
+        return true;
+      }
+    }
+  return false;
+};
+
+// console.log(containsDuplicate(nums));
+
+/*
+* Given an integer array nums, move all 0's to the end of it while maintaining
+* the relative order of the non-zero elements.
+* Note that you must do this in-place without making a copy of the array.
+*/
+
+// let nums = [0,0,1];
+//[1,3,12,0,0]
+
+function moveZeroes(nums) {
+    for(let i = 0; i < nums.length; i++){
+      console.log(nums[i], i)
+      if(nums[i] === 0){
+        nums.splice(i,1);
+        nums.push(0);
+      }
+    }
+    for(let i = 0; i < nums.length; i++){
+      console.log(nums[i], i)
+      if(nums[i] === 0){
+        nums.splice(i,1);
+        nums.push(0);
+      }
+    }
+    return nums;
+};
+
+// console.log(moveZeroes(nums));
+
+/*
+* Given two integer arrays nums1 and nums2, return an array of their
+* intersection. Each element in the result must appear as many times as
+* it shows in both arrays and you may return the result in any order.
+*/
+
+let nums1 = [2,1];
+let nums2 = [1,2];
+
+let nums01 = [1,2,2,1];
+let nums02 = [1,2];
+
+function intersect(nums1, nums2) {
+  let intersectionArr = [];
+  let continueAdd = true;
+  let iter= 2;
+  
+    for(let i = 0;  i < nums1.length; i++){
+      for(let j = 0; j < nums2.length; j++){
+          if(nums1[i] === nums2[j] || 
+             nums1[i] === nums2[j-1]){
+              if(nums1[i] !==  undefined){
+                // console.log(nums1[i]);
+                intersectionArr.push(nums1[i]);
+                // console.log(nums1[i]+ ' == '  + nums2[j], nums1[i-1] + ' == ' + nums2[j+1]);
+                // console.log(nums1[i] + ' == ' + nums2[j], nums1[i+1] + ' == ' + nums2[j-1]); 
+                if(nums1[i] === nums2[j] && nums1[i-1] === nums2[j+1] && (nums1[i-1] !== undefined)){
+                  // console.log('-1: '+nums1[i-1]);
+                    intersectionArr.push(nums1[i-1]);
+                    return intersectionArr;
+                  
+                }else if(nums1[i] === nums2[j] && nums1[i+1] === nums2[j-1] && (nums1[i+1] !== undefined) ){
+                  // console.log('+1 :' +nums1[i+1]);
+                        intersectionArr.push(nums1[i+1]);
+                        return intersectionArr;
+                    
+                }
+              }
+            i++;    
+          }
+          
+      }
+      return intersectionArr;
+    }
+    
+};
+// console.log(Number.isNaN(undefined));
+// console.log(intersect(nums01, nums02));
+console.log(intersect(nums1, nums2));
