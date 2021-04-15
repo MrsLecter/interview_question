@@ -241,9 +241,9 @@ function intersect(nums1, nums2) {
           }
           
       }
-      return intersectionArr;
+     
     }
-    
+     return intersectionArr;
 };
 // console.log(Number.isNaN(undefined));
 // console.log(intersect(nums01, nums02));
