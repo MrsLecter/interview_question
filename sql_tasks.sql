@@ -3,7 +3,7 @@ CREATE TABLE employee (
   emp_id INT PRIMARY KEY,
   first_name VARCHAR(40),
   last_name VARCHAR(40),
-  birth_day DATE,
+  birth_date DATE,
   sex VARCHAR(1),
   salary INT,
   super_id INT,
@@ -64,9 +64,9 @@ CREATE TABLE employee (
   INSERT INTO branch VALUES(2, 'Scranton', 102, '1992-04-06');
   INSERT INTO branch VALUES(3, 'Stampford', 106, '1998-02-13');
   
-  UPDATE employee SET branch_id=1 WHERE emp_id=100 AND emp_id=101;
-  UPDATE employee SET branch_id=2 WHERE emp_id=102 AND emp_id=103 AND emp_id=104 AND emp_id=105;
-  UPDATE employee SET branch_id=3 WHERE emp_id=106 AND emp_id=107 AND emp_id=108;
+  UPDATE employee SET branch_id=1 WHERE emp_id IN (100, 101);
+  UPDATE employee SET branch_id=2 WHERE emp_id IN (102 ,103, 104, 105);
+  UPDATE employee SET branch_id=3 WHERE emp_id IN (106, 107, 108);
   
   UPDATE employee SET super_id=100 WHERE emp_id IN (101, 102, 106);
   UPDATE employee SET super_id=102 WHERE emp_id>102 AND emp_id<106;
@@ -93,8 +93,27 @@ CREATE TABLE employee (
   INSERT INTO branch_supplier VALUES(3, 'Patriot Paper', 'Paper');
   INSERT INTO branch_supplier VALUES(2, 'JT Forms & Labels', 'Custom forms');
 
-SELECT * FROM branch;
-SELECT * FROM employee;
+
+/* Find all employees ordered by salary */
+SELECT * FROM employee ORDER BY salary DESC;
+/* Find all employees ordered by sex than name */
+SELECT * FROM employee ORDER BY sex, first_name, last_name;
+/* Find first 5 employees in  thetable */
+SELECT * FROM employee LIMIT 5;
+/* Find the forename andsurenames names of allemployee */
+SELECT first_name  AS forename, last_Name AS surname FROM employee;
+/* Find  out all the different genders */
+SELECT DISTINCT sex AS Gender FROM employee;
+/* Find the number of employees */
+SELECT COUNT(emp_id) FROM employee;
+/* Find the number of female employees born after 1970 */
+SELECT COUNT(emp_id) FROM employee 
+WHERE sex='F' AND birth_date > '1970-01-01';
+/* Fid the average of all employees salaries */
+SELECT AVG(salary) FROM employee;
+/* Find out how many males and females there are */
+SELECT COUNT(sex) AS gender FROM employee
+GROUP BY sex;
   
 
   
